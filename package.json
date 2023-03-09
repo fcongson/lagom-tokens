@@ -1,0 +1,12 @@
+{
+  "name": "@fcongson/lagom-tokens",
+  "author": "Frank Congson",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fcongson/lagom-tokens"
+  },
+  "devDependencies": {
+    "@supernovaio/cli": "^0.9.14"
+  }
+}
