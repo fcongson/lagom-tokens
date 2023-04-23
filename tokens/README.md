@@ -11,7 +11,7 @@ Each `[layer].js` file uses a single token set defined in `tokens.studio.json`. 
 ```
 // core.js
 
-const { core } = require("tokens.studio.json");
+const { core } = require("./tokens.studio.json");
 module.exports = core;
 ```
 

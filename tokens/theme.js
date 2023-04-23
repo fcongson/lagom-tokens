@@ -1,2 +1,2 @@
-const { theme } = require("tokens.studio.json");
+const { theme } = require("./tokens.studio.json");
 module.exports = theme;
