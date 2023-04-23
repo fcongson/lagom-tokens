@@ -1,2 +1,2 @@
-const { core } = require("../tokens.json");
+const { core } = require("tokens.studio.json");
 module.exports = core;

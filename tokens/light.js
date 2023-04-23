@@ -1,2 +1,2 @@
-const { light } = require("../tokens.json");
+const { light } = require("tokens.studio.json");
 module.exports = light;
