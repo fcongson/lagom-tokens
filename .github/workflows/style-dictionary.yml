@@ -1,0 +1,23 @@
+name: Style Dictionary Build
+
+run-name: ${{ github.actor }} is building tokens via style dictionary
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install --immutable --immutable-cache --check-cache
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
