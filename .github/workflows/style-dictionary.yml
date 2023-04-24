@@ -5,7 +5,7 @@ run-name: ${{ github.actor }} is building tokens via style dictionary and publis
 on:
   push:
     tags:
-      - "0.*"
+      - "v0.*"
 
 jobs:
   build:
