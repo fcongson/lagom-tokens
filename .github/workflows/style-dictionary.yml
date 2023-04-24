@@ -25,6 +25,4 @@ jobs:
         with:
           cmd: build
       - name: Publish package
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: publish
+        run: npm publish
