@@ -26,3 +26,5 @@ jobs:
           cmd: build
       - name: Publish package
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
