@@ -14,5 +14,8 @@
     "build": "node sd.build.js"
   },
   "version": "0.3.0",
-  "main": "build/"
+  "main": "build/",
+  "files": [
+    "build/"
+  ]
 }
