@@ -1,8 +1,11 @@
-name: Style Dictionary Build
+name: Style Dictionary Workflow
 
-run-name: ${{ github.actor }} is building tokens via style dictionary
+run-name: ${{ github.actor }} is building tokens via style dictionary and publishing package
 
-on: [push]
+on:
+  push:
+    tags:
+      - "0.*"
 
 jobs:
   build:
@@ -17,7 +20,11 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: install --immutable --immutable-cache --check-cache
-      - name: Build production bundle
+      - name: Build package
         uses: borales/actions-yarn@v4
         with:
           cmd: build
+      - name: Publish package
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: publish
