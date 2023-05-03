@@ -8,26 +8,7 @@ on:
       - v0.**
 
 jobs:
-  build:
-    name: Build tokens
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install --immutable --immutable-cache --check-cache
-      - name: Build package
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
-  publish:
-    needs: [build]
-    name: Publish tokens
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -36,6 +17,14 @@ jobs:
         with:
           node-version: 16.x
           registry-url: 'https://npm.pkg.github.com'
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install --immutable --immutable-cache --check-cache
+      - name: Build package
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
       - name: Publish package
         run: npm publish
         env:
