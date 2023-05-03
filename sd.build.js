@@ -14,7 +14,7 @@ TOKEN_SETS.forEach(({ name, references }) =>
     platforms: {
       css: {
         transformGroup: "css",
-        prefix: "sd",
+        prefix: "lagom",
         buildPath: "build/css/",
         files: [
           {
