@@ -596,12 +596,6 @@
         }
       }
     },
-    "card": {
-      "background": {
-        "value": "{bg.default}",
-        "type": "color"
-      }
-    },
     "typography": {
       "Body": {
         "type": "typography",
@@ -634,10 +628,6 @@
     "header": {
       "text": {
         "value": "{fg.default}",
-        "type": "color"
-      },
-      "background": {
-        "value": "{bg.default}",
         "type": "color"
       }
     },
