@@ -1,41 +1,97 @@
+const { registerTransforms } = require("@tokens-studio/sd-transforms");
 const StyleDictionary = require("style-dictionary");
 
-const TOKEN_SETS = [
-  { name: "core" },
-  { name: "light", references: ["core"] },
-  { name: "dark", references: ["core"] },
-  { name: "theme", references: ["core", "light"] },
+registerTransforms(StyleDictionary);
+
+const VARIABLES = [
+  { source: "core", destination: "core" },
+  { source: "light", destination: "light", references: ["core"] },
+  { source: "dark", destination: "dark", references: ["core"] },
 ];
 
-TOKEN_SETS.forEach(({ name, references }) =>
-  StyleDictionary.extend({
-    include: references?.map((set) => `tokens/${set}.js`),
-    source: [`tokens/${name}.js`],
-    platforms: {
-      css: {
-        transformGroup: "css",
-        prefix: "lagom",
-        buildPath: "build/css/",
-        files: [
-          {
-            destination: `_variables.${name}.css`,
-            format: "css/variables",
-            options: {
-              outputReferences: true,
-            },
-          },
-        ],
-      },
-      js: {
-        transformGroup: "js",
-        buildPath: "build/js/",
-        files: [
-          {
-            destination: `variables.${name}.js`,
-            format: "javascript/es6",
-          },
-        ],
-      },
+const THEMES = [
+  { source: "theme", destination: "light", references: ["core", "light"] },
+  { source: "theme", destination: "dark", references: ["core", "dark"] },
+];
+
+/**
+ * Get common css config for style dictionary
+ */
+
+const getCssConfig = (filePrefix, destination) => ({
+  transforms: [
+    "ts/descriptionToComment",
+    "ts/resolveMath",
+    "ts/size/px",
+    "ts/opacity",
+    "ts/size/lineheight",
+    "ts/type/fontWeight",
+    "ts/color/modifiers",
+    "ts/size/css/letterspacing",
+    "ts/color/css/hexrgba",
+    "ts/typography/css/shorthand",
+    "ts/shadow/css/shorthand",
+    "ts/border/css/shorthand",
+    "name/cti/kebab",
+  ],
+  prefix: "lagom",
+  buildPath: "build/css/",
+  files: [
+    {
+      destination: `_${filePrefix}.${destination}.css`,
+      format: "css/variables",
     },
-  }).buildAllPlatforms()
-);
+  ],
+});
+
+/**
+ * Get common js config for style dictionary
+ */
+
+const getJsConfig = (filePrefix, destination) => ({
+  transformGroup: "tokens-studio",
+  prefix: "lagom",
+  buildPath: "build/js/",
+  files: [
+    {
+      destination: `${filePrefix}.${destination}.js`,
+      format: "javascript/es6",
+    },
+  ],
+});
+
+/**
+ * Build token set variables
+ */
+
+VARIABLES.forEach(({ source, destination, references }) => {
+  const filePrefix = "variables";
+  const sd = StyleDictionary.extend({
+    include: references?.map((set) => `tokens/${set}.js`),
+    source: [`tokens/${source}.js`],
+    platforms: {
+      css: getCssConfig(filePrefix, destination),
+      js: getJsConfig(filePrefix, destination),
+    },
+  });
+  sd.cleanAllPlatforms();
+  sd.buildAllPlatforms();
+});
+
+/**
+ * Build themes
+ */
+
+THEMES.forEach(({ source, destination, references }) => {
+  const filePrefix = "theme";
+  const sd = StyleDictionary.extend({
+    include: references?.map((set) => `tokens/${set}.js`),
+    source: [`tokens/${source}.js`],
+    platforms: {
+      css: getCssConfig(filePrefix, destination),
+      js: getJsConfig(filePrefix, destination),
+    },
+  });
+  sd.cleanAllPlatforms();
+  sd.buildAllPlatforms();
+});
