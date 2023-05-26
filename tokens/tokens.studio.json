@@ -558,8 +558,8 @@
           }
         }
       },
-      "overlay": {
-        "opacity": {
+      "opacity": {
+        "overlay": {
           "value": "{core.opacity.md}",
           "type": "opacity"
         }
@@ -678,8 +678,8 @@
           }
         }
       },
-      "overlay": {
-        "opacity": {
+      "opacity": {
+        "overlay": {
           "value": "{core.opacity.md}",
           "type": "opacity"
         }
@@ -799,7 +799,7 @@
             }
           },
           "opacity": {
-            "value": "{semantic.overlay.opacity}",
+            "value": "{semantic.opacity.overlay}",
             "type": "opacity"
           }
         }
