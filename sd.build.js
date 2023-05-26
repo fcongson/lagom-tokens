@@ -4,24 +4,43 @@ const StyleDictionary = require("style-dictionary");
 registerTransforms(StyleDictionary);
 
 const VARIABLES = [
-  { source: "core", destination: "core" },
-  { source: "light", destination: "light", references: ["core"] },
-  { source: "dark", destination: "dark", references: ["core"] },
+  { set: "core", destination: "core" },
+  { set: "semantic", references: ["core"] },
+  { set: "semantic.light", references: ["core"] },
+  { set: "semantic.dark", references: ["core"] },
+  {
+    set: "component",
+    references: ["core", "semantic", "semantic.light", "semantic.dark"],
+  },
 ];
 
 const THEMES = [
-  { source: "theme", destination: "light", references: ["core", "light"] },
-  { source: "theme", destination: "dark", references: ["core", "dark"] },
+  {
+    set: "component",
+    output: "light",
+    references: ["core", "semantic", "semantic.light"],
+  },
+  {
+    set: "component",
+    output: "dark",
+    references: ["core", "semantic", "semantic.dark"],
+  },
 ];
 
 /**
  * Get common css config for style dictionary
  */
 
-const getCssConfig = (filePrefix, destination) => ({
+const getCssConfig = ({
+  destinationPrefix,
+  destination,
+  filter,
+  fileHeader,
+  resolve,
+}) => ({
   transforms: [
     "ts/descriptionToComment",
-    "ts/resolveMath",
+    ...(resolve ? ["ts/resolveMath"] : []),
     "ts/size/px",
     "ts/opacity",
     "ts/size/lineheight",
@@ -38,8 +57,13 @@ const getCssConfig = (filePrefix, destination) => ({
   buildPath: "build/css/",
   files: [
     {
-      destination: `_${filePrefix}.${destination}.css`,
+      destination: `_${destinationPrefix}.${destination}.css`,
       format: "css/variables",
+      filter,
+      options: {
+        outputReferences: resolve ? false : true,
+        fileHeader,
+      },
     },
   ],
 });
@@ -48,14 +72,15 @@ const getCssConfig = (filePrefix, destination) => ({
  * Get common js config for style dictionary
  */
 
-const getJsConfig = (filePrefix, destination) => ({
+const getJsConfig = ({ destinationPrefix, destination, filter }) => ({
   transformGroup: "tokens-studio",
   prefix: "lagom",
   buildPath: "build/js/",
   files: [
     {
-      destination: `${filePrefix}.${destination}.js`,
+      destination: `${destinationPrefix}.${destination}.js`,
       format: "javascript/es6",
+      filter,
     },
   ],
 });
@@ -64,14 +89,27 @@ const getJsConfig = (filePrefix, destination) => ({
  * Build token set variables
  */
 
-VARIABLES.forEach(({ source, destination, references }) => {
-  const filePrefix = "variables";
+VARIABLES.forEach(({ set, references }) => {
+  const destinationPrefix = "variables";
+  const filter = (token) => token.isSource;
+  const referenceNotice = references?.length
+    ? ["", `References variables: ${references.join(", ")}`]
+    : [];
+  const fileHeader = (defaultMessage) => [
+    ...defaultMessage,
+    ...referenceNotice,
+  ];
   const sd = StyleDictionary.extend({
     include: references?.map((set) => `tokens/${set}.js`),
-    source: [`tokens/${source}.js`],
+    source: [`tokens/${set}.js`],
     platforms: {
-      css: getCssConfig(filePrefix, destination),
-      js: getJsConfig(filePrefix, destination),
+      css: getCssConfig({
+        destinationPrefix,
+        destination: set,
+        filter,
+        fileHeader,
+      }),
+      js: getJsConfig({ destinationPrefix, destination: set, filter }),
     },
   });
   sd.cleanAllPlatforms();
@@ -82,14 +120,18 @@ VARIABLES.forEach(({ source, destination, references }) => {
  * Build themes
  */
 
-THEMES.forEach(({ source, destination, references }) => {
-  const filePrefix = "theme";
+THEMES.forEach(({ set, output, references }) => {
+  const destinationPrefix = "theme";
   const sd = StyleDictionary.extend({
     include: references?.map((set) => `tokens/${set}.js`),
-    source: [`tokens/${source}.js`],
+    source: [`tokens/${set}.js`],
     platforms: {
-      css: getCssConfig(filePrefix, destination),
-      js: getJsConfig(filePrefix, destination),
+      css: getCssConfig({
+        destinationPrefix,
+        destination: output,
+        resolve: true,
+      }),
+      js: getJsConfig({ destinationPrefix, destination: output }),
     },
   });
   sd.cleanAllPlatforms();
