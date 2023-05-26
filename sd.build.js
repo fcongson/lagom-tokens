@@ -32,15 +32,15 @@ const THEMES = [
  */
 
 const getCssConfig = ({
-  destinationPrefix,
+  buildPathSubdirectory,
   destination,
   filter,
   fileHeader,
-  resolve,
+  outputReferences,
 }) => ({
   transforms: [
     "ts/descriptionToComment",
-    ...(resolve ? ["ts/resolveMath"] : []),
+    ...(outputReferences ? [] : ["ts/resolveMath"]),
     "ts/size/px",
     "ts/opacity",
     "ts/size/lineheight",
@@ -54,14 +54,14 @@ const getCssConfig = ({
     "name/cti/kebab",
   ],
   prefix: "lagom",
-  buildPath: "build/css/",
+  buildPath: `css/${buildPathSubdirectory}/`,
   files: [
     {
-      destination: `_${destinationPrefix}.${destination}.css`,
+      destination: `_${destination}.css`,
       format: "css/variables",
       filter,
       options: {
-        outputReferences: resolve ? false : true,
+        outputReferences,
         fileHeader,
       },
     },
@@ -72,13 +72,13 @@ const getCssConfig = ({
  * Get common js config for style dictionary
  */
 
-const getJsConfig = ({ destinationPrefix, destination, filter }) => ({
+const getJsConfig = ({ buildPathSubdirectory, destination, filter }) => ({
   transformGroup: "tokens-studio",
   prefix: "lagom",
-  buildPath: "build/js/",
+  buildPath: `js/${buildPathSubdirectory}/`,
   files: [
     {
-      destination: `${destinationPrefix}.${destination}.js`,
+      destination: `${destination}.js`,
       format: "javascript/es6",
       filter,
     },
@@ -90,7 +90,7 @@ const getJsConfig = ({ destinationPrefix, destination, filter }) => ({
  */
 
 VARIABLES.forEach(({ set, references }) => {
-  const destinationPrefix = "variables";
+  const buildPathSubdirectory = "variables";
   const filter = (token) => token.isSource;
   const referenceNotice = references?.length
     ? ["", `References variables: ${references.join(", ")}`]
@@ -104,12 +104,12 @@ VARIABLES.forEach(({ set, references }) => {
     source: [`tokens/${set}.js`],
     platforms: {
       css: getCssConfig({
-        destinationPrefix,
+        buildPathSubdirectory,
         destination: set,
         filter,
         fileHeader,
       }),
-      js: getJsConfig({ destinationPrefix, destination: set, filter }),
+      js: getJsConfig({ buildPathSubdirectory, destination: set, filter }),
     },
   });
   sd.cleanAllPlatforms();
@@ -121,17 +121,17 @@ VARIABLES.forEach(({ set, references }) => {
  */
 
 THEMES.forEach(({ set, output, references }) => {
-  const destinationPrefix = "theme";
+  const buildPathSubdirectory = "theme";
   const sd = StyleDictionary.extend({
     include: references?.map((set) => `tokens/${set}.js`),
     source: [`tokens/${set}.js`],
     platforms: {
       css: getCssConfig({
-        destinationPrefix,
+        buildPathSubdirectory,
         destination: output,
-        resolve: true,
+        outputReferences: true,
       }),
-      js: getJsConfig({ destinationPrefix, destination: output }),
+      js: getJsConfig({ buildPathSubdirectory, destination: output }),
     },
   });
   sd.cleanAllPlatforms();

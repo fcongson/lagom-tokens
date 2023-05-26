@@ -130,4 +130,5 @@ dist
 .pnp.*
 
 # style-dictionary build
-build/
+css/
+js/
