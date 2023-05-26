@@ -428,8 +428,8 @@
           }
         }
       },
-      "brand": {
-        "color": {
+      "color": {
+        "brand": {
           "primary": {
             "value": "{core.colors.olive.base}",
             "type": "color"
