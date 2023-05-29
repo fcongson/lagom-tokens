@@ -86,6 +86,23 @@ const getJsConfig = ({ buildPathSubdirectory, destination, filter }) => ({
 });
 
 /**
+ * Get common json config for style dictionary
+ */
+
+const getJsonConfig = ({ buildPathSubdirectory, destination, filter }) => ({
+  transformGroup: "tokens-studio",
+  prefix: "lagom",
+  buildPath: `json/${buildPathSubdirectory}/`,
+  files: [
+    {
+      destination: `${destination}.json`,
+      format: "json",
+      filter,
+    },
+  ],
+});
+
+/**
  * Build token set variables
  */
 
@@ -110,6 +127,7 @@ VARIABLES.forEach(({ set, references }) => {
         fileHeader,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: set, filter }),
+      // json: getJsonConfig({ buildPathSubdirectory, destination: set, filter }),
     },
   });
   sd.cleanAllPlatforms();
