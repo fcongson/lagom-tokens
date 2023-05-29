@@ -2,12 +2,12 @@
   "mode": "single-file",
   "mapping": [
     {
-      "tokenSets": ["core", "light", "theme"],
+      "tokenSets": ["core", "semantic", "semantic-light", "component"],
       "supernovaBrand": "Default",
       "supernovaTheme": null
     },
     {
-      "tokenSets": ["core", "dark", "theme"],
+      "tokenSets": ["core", "semantic", "semantic-dark", "component"],
       "supernovaBrand": "Default",
       "supernovaTheme": "Dark"
     }
