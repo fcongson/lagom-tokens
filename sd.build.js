@@ -37,10 +37,12 @@ const getCssConfig = ({
   filter,
   fileHeader,
   outputReferences,
+  selector,
 }) => ({
   transforms: [
     "ts/descriptionToComment",
-    ...(outputReferences ? [] : ["ts/resolveMath"]),
+    // ...(outputReferences ? [] : ["ts/resolveMath"]),
+    "ts/resolveMath",
     "ts/size/px",
     "ts/opacity",
     "ts/size/lineheight",
@@ -63,6 +65,7 @@ const getCssConfig = ({
       options: {
         outputReferences,
         fileHeader,
+        selector,
       },
     },
   ],
@@ -125,6 +128,7 @@ VARIABLES.forEach(({ set, references }) => {
         destination: set,
         filter,
         fileHeader,
+        // outputReferences: true,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: set, filter }),
       // json: getJsonConfig({ buildPathSubdirectory, destination: set, filter }),
@@ -147,7 +151,8 @@ THEMES.forEach(({ set, output, references }) => {
       css: getCssConfig({
         buildPathSubdirectory,
         destination: output,
-        outputReferences: true,
+        // outputReferences: true,
+        selector: `[data-lagom-theme~="${output}"]`,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: output }),
     },
