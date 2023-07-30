@@ -556,11 +556,21 @@
               "type": "color"
             }
           }
+        },
+        "border": {
+          "default": {
+            "value": "{core.colors.grey.darker40}",
+            "type": "color"
+          },
+          "muted": {
+            "value": "{core.colors.olive.lighter40}",
+            "type": "color"
+          }
         }
       },
       "opacity": {
         "overlay": {
-          "value": "{core.opacity.md}",
+          "value": "{core.opacity.min}",
           "type": "opacity"
         }
       }
@@ -676,12 +686,28 @@
               "type": "color"
             }
           }
+        },
+        "border": {
+          "default": {
+            "value": "{core.colors.olive.lighter40}",
+            "type": "color"
+          },
+          "muted": {
+            "value": "{core.colors.olive.darker10}",
+            "type": "color"
+          }
         }
       },
       "opacity": {
         "overlay": {
-          "value": "{core.opacity.md}",
+          "value": "{core.opacity.low}",
           "type": "opacity"
+        }
+      },
+      "image": {
+        "filter": {
+          "value": "brightness(0.8) contrast(1.2)",
+          "type": "other"
         }
       }
     }
