@@ -18,11 +18,13 @@ const THEMES = [
   {
     set: "component",
     output: "light",
+    selector: '[data-lagom-theme~="light"]',
     references: ["core", "semantic", "semantic.light"],
   },
   {
     set: "component",
     output: "dark",
+    selector: '[data-lagom-theme~="dark"]',
     references: ["core", "semantic", "semantic.dark"],
   },
 ];
@@ -142,7 +144,7 @@ VARIABLES.forEach(({ set, references }) => {
  * Build themes
  */
 
-THEMES.forEach(({ set, output, references }) => {
+THEMES.forEach(({ set, output, selector, references }) => {
   const buildPathSubdirectory = "theme";
   const sd = StyleDictionary.extend({
     include: references?.map((set) => `tokens/${set}.js`),
@@ -152,7 +154,7 @@ THEMES.forEach(({ set, output, references }) => {
         buildPathSubdirectory,
         destination: output,
         // outputReferences: true,
-        selector: `[data-lagom-theme~="${output}"]`,
+        selector,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: output }),
     },
