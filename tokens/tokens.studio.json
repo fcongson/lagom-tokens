@@ -56,6 +56,10 @@
           "value": "{core.dimension.xl}",
           "type": "spacing"
         },
+        "xxl": {
+          "value": "{core.dimension.xxl}",
+          "type": "spacing"
+        },
         "multi-value": {
           "value": "{core.dimension.sm} {core.dimension.xl}",
           "type": "spacing",
