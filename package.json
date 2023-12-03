@@ -8,11 +8,12 @@
   },
   "devDependencies": {
     "@supernovaio/cli": "^0.9.23",
-    "@tokens-studio/sd-transforms": "^0.9.1",
-    "style-dictionary": "^3.8.0"
+    "@tokens-studio/sd-transforms": "^0.12.1",
+    "style-dictionary": "^3.9.0"
   },
   "scripts": {
-    "build": "node sd.build.js"
+    "build": "node scripts/sd.build.js && yarn css:calc",
+    "css:calc": "node scripts/css.calc.js"
   },
   "version": "0.16.0",
   "files": [

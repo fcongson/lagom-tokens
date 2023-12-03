@@ -194,24 +194,24 @@
     tinycolor2 "^1.4.2"
     uuid "^8.3.2"
 
-"@tokens-studio/sd-transforms@^0.9.1":
-  version "0.9.1"
-  resolved "https://registry.yarnpkg.com/@tokens-studio/sd-transforms/-/sd-transforms-0.9.1.tgz#c9f49c48926a63d1b1907ff01355e9e07385f74d"
-  integrity sha512-Kis9XW+Z7nYNYAfF0++J9pGMJIRBzxjW4HvukEtRoxs21Z7WTBLszmKSK7DpSIeDglsg37qW7hiUa0oTPfXTow==
+"@tokens-studio/sd-transforms@^0.12.1":
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/@tokens-studio/sd-transforms/-/sd-transforms-0.12.1.tgz#d6043f6fa21e459bfdbb7ee3d6c6ade9d821e7b7"
+  integrity sha512-iHccetqCbsM4EOTA/ScNC5amO45IR0MhQ2YZnR7B5lnM58sxFTGKauyZ5Gf4vd+TpIP7OSMx/Cz70fDo7TJ6Yw==
   dependencies:
-    "@tokens-studio/types" "^0.2.1"
+    "@tokens-studio/types" "^0.2.4"
     color2k "^2.0.1"
     colorjs.io "^0.4.3"
     deepmerge "^4.3.1"
     expr-eval "^2.0.2"
     is-mergeable-object "^1.1.1"
     postcss-calc-ast-parser "^0.1.4"
-    style-dictionary "^3.7.2"
+    style-dictionary "^3.8.0"
 
-"@tokens-studio/types@^0.2.1":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@tokens-studio/types/-/types-0.2.3.tgz#b9bfa7fcc324e55183a1ad07ea89b5df8e03912f"
-  integrity sha512-2KN3V0JPf+Zh8aoVMwykJq29Lsi7vYgKGYBQ/zQ+FbDEmrH6T/Vwn8kG7cvbTmW1JAAvgxVxMIivgC9PmFelNA==
+"@tokens-studio/types@^0.2.4":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@tokens-studio/types/-/types-0.2.5.tgz#fbddad1d0040f1316ee74dbd42a389f2f3d2fcbc"
+  integrity sha512-pJ0zWxGnEjca4dznFIHC9/oXuovu3DKHUhLDNJVzTRZEVXhWkIRIUbjDwIRihxBr39c776W+3thYvWMgChT0Rw==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.9"
@@ -1540,10 +1540,25 @@ strip-bom@^3.0.0:
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
   integrity sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==
 
-style-dictionary@^3.7.2, style-dictionary@^3.8.0:
+style-dictionary@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-3.8.0.tgz#7cb8d64360c53431f768d44def665f61e971a73e"
   integrity sha512-wHlB/f5eO3mDcYv6WtOz6gvQC477jBKrwuIXe+PtHskTCBsJdAOvL8hCquczJxDui2TnwpeNE+2msK91JJomZg==
+  dependencies:
+    chalk "^4.0.0"
+    change-case "^4.1.2"
+    commander "^8.3.0"
+    fs-extra "^10.0.0"
+    glob "^7.2.0"
+    json5 "^2.2.2"
+    jsonc-parser "^3.0.0"
+    lodash "^4.17.15"
+    tinycolor2 "^1.4.1"
+
+style-dictionary@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-3.9.0.tgz#c89ba60b81a821c52515ae45d5e5c2da41c34546"
+  integrity sha512-mnq8QfPJoj3ellKHRKZwmCgYUGgwYtoagW5edyKpR09O1W4/XqBdeKXoY/LbeIKqHrqVR7sGgk6E/dNYkPS4aA==
   dependencies:
     chalk "^4.0.0"
     change-case "^4.1.2"

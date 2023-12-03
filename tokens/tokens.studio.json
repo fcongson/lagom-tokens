@@ -287,15 +287,15 @@
           "type": "fontFamilies"
         },
         "sansSerif": {
-          "value": "Montserrat",
+          "value": "Montserrat, sans-serif",
           "type": "fontFamilies"
         },
         "serif": {
-          "value": "Domine",
+          "value": "Domine, serif",
           "type": "fontFamilies"
         },
         "monospace": {
-          "value": "silkamono",
+          "value": "silkamono, monospace",
           "type": "fontFamilies"
         }
       },

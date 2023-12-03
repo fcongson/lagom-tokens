@@ -3,11 +3,34 @@ const StyleDictionary = require("style-dictionary");
 
 registerTransforms(StyleDictionary);
 
+// https://github.com/amzn/style-dictionary/issues/820#issuecomment-1188167679
+StyleDictionary.registerTransform({
+  type: "value",
+  transitive: true,
+  name: "css/calc",
+  matcher: ({ value }) => {
+    console.log("matching", value);
+    return typeof value === "string" && value?.includes("*");
+  },
+  transformer: ({ value }) => {
+    console.log("transforming", value, "returning", `calc(${value})`);
+    return `calc(${value})`;
+  },
+});
+
 const VARIABLES = [
   { set: "core", destination: "core" },
   { set: "semantic", references: ["core"] },
-  { set: "semantic.light", references: ["core"] },
-  { set: "semantic.dark", references: ["core"] },
+  {
+    set: "semantic.light",
+    // selector: '[data-lagom-theme~="light"]', // use default :root selector
+    references: ["core"],
+  },
+  {
+    set: "semantic.dark",
+    selector: '[data-lagom-theme~="dark"]',
+    references: ["core"],
+  },
   {
     set: "component",
     references: ["core", "semantic", "semantic.light", "semantic.dark"],
@@ -18,7 +41,7 @@ const THEMES = [
   {
     set: "component",
     output: "light",
-    selector: '[data-lagom-theme~="light"]',
+    // selector: '[data-lagom-theme~="light"]', // use default :root selector
     references: ["core", "semantic", "semantic.light"],
   },
   {
@@ -43,12 +66,12 @@ const getCssConfig = ({
 }) => ({
   transforms: [
     "ts/descriptionToComment",
-    // ...(outputReferences ? [] : ["ts/resolveMath"]),
+    // ...(outputReferences ? ["css/calc"] : ["ts/resolveMath"]),
     "ts/resolveMath",
     "ts/size/px",
     "ts/opacity",
     "ts/size/lineheight",
-    "ts/type/fontWeight",
+    "ts/typography/fontWeight",
     "ts/color/modifiers",
     "ts/size/css/letterspacing",
     "ts/color/css/hexrgba",
@@ -111,7 +134,7 @@ const getJsonConfig = ({ buildPathSubdirectory, destination, filter }) => ({
  * Build token set variables
  */
 
-VARIABLES.forEach(({ set, references }) => {
+VARIABLES.forEach(({ set, selector, references }) => {
   const buildPathSubdirectory = "variables";
   const filter = (token) => token.isSource;
   const referenceNotice = references?.length
@@ -130,7 +153,8 @@ VARIABLES.forEach(({ set, references }) => {
         destination: set,
         filter,
         fileHeader,
-        // outputReferences: true,
+        outputReferences: true,
+        selector,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: set, filter }),
       // json: getJsonConfig({ buildPathSubdirectory, destination: set, filter }),
@@ -146,6 +170,14 @@ VARIABLES.forEach(({ set, references }) => {
 
 THEMES.forEach(({ set, output, selector, references }) => {
   const buildPathSubdirectory = "theme";
+  // const filter = (token) => token.isSource;
+  // const referenceNotice = references?.length
+  //   ? ["", `References variables: ${references.join(", ")}`]
+  //   : [];
+  // const fileHeader = (defaultMessage) => [
+  //   ...defaultMessage,
+  //   ...referenceNotice,
+  // ];
   const sd = StyleDictionary.extend({
     include: references?.map((set) => `tokens/${set}.js`),
     source: [`tokens/${set}.js`],
@@ -153,7 +185,9 @@ THEMES.forEach(({ set, output, selector, references }) => {
       css: getCssConfig({
         buildPathSubdirectory,
         destination: output,
-        // outputReferences: true,
+        // filter,
+        // fileHeader,
+        outputReferences: true,
         selector,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: output }),
