@@ -3,21 +3,6 @@ const StyleDictionary = require("style-dictionary");
 
 registerTransforms(StyleDictionary);
 
-// https://github.com/amzn/style-dictionary/issues/820#issuecomment-1188167679
-StyleDictionary.registerTransform({
-  type: "value",
-  transitive: true,
-  name: "css/calc",
-  matcher: ({ value }) => {
-    console.log("matching", value);
-    return typeof value === "string" && value?.includes("*");
-  },
-  transformer: ({ value }) => {
-    console.log("transforming", value, "returning", `calc(${value})`);
-    return `calc(${value})`;
-  },
-});
-
 const VARIABLES = [
   { set: "core", destination: "core" },
   { set: "semantic", references: ["core"] },
