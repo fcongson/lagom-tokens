@@ -15,7 +15,7 @@
     "build": "node scripts/sd.build.js && yarn css:calc",
     "css:calc": "node scripts/css.calc.js"
   },
-  "version": "0.16.0",
+  "version": "0.17.0",
   "files": [
     "css/",
     "js/"
