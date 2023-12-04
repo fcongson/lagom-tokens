@@ -405,7 +405,7 @@
           "type": "fontSizes"
         },
         "body": {
-          "value": "16",
+          "value": "16px",
           "type": "fontSizes"
         },
         "sm": {

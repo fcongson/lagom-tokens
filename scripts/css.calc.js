@@ -4,11 +4,11 @@ const path = require("path");
 // Function to wrap CSS custom properties with calc for multiplication
 function wrapMultiplicationWithCalc(line) {
   return line.replace(
-    /(--[\w-]+:\s*)([^;]+)(;)/g,
+    /  (--[\w-]+:\s*)([^;]+)(;)/g,
     (match, property, value, semicolon) => {
       // Check if the value contains the multiplication symbol
       if (/\*/.test(value)) {
-        return `${property}calc(${value})${semicolon}`;
+        return `  ${property}calc(${value})${semicolon}`;
       }
       return line; // If no multiplication symbol, return the original line
     },
