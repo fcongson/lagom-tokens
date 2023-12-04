@@ -7,7 +7,7 @@
           "type": "dimension"
         },
         "xxs": {
-          "value": "1",
+          "value": "1px",
           "type": "dimension"
         },
         "xs": {
@@ -68,7 +68,7 @@
       },
       "borderRadius": {
         "xs": {
-          "value": "4",
+          "value": "4px",
           "type": "borderRadius"
         },
         "sm": {

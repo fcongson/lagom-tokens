@@ -52,8 +52,8 @@ const getCssConfig = ({
   transforms: [
     "ts/descriptionToComment",
     // ...(outputReferences ? ["css/calc"] : ["ts/resolveMath"]),
-    "ts/resolveMath",
-    "ts/size/px",
+    // "ts/resolveMath",
+    // "ts/size/px",
     "ts/opacity",
     "ts/size/lineheight",
     "ts/typography/fontWeight",
