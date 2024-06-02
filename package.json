@@ -7,9 +7,8 @@
     "url": "https://github.com/fcongson/lagom-tokens"
   },
   "devDependencies": {
-    "@supernovaio/cli": "^0.9.23",
-    "@tokens-studio/sd-transforms": "^0.12.1",
-    "style-dictionary": "^3.9.0"
+    "@tokens-studio/sd-transforms": "^0.12.2",
+    "style-dictionary": "^3.9.2"
   },
   "scripts": {
     "build": "node scripts/sd.build.js && yarn css:calc",
