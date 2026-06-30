@@ -2,21 +2,31 @@
   "name": "@fcongson/lagom-tokens",
   "author": "Frank Congson",
   "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/fcongson/lagom-tokens"
   },
   "devDependencies": {
-    "@tokens-studio/sd-transforms": "^0.12.2",
-    "style-dictionary": "^3.9.2"
+    "@tokens-studio/sd-transforms": "^2.0.3",
+    "style-dictionary": "^5.5.0"
   },
   "scripts": {
-    "build": "node scripts/sd.build.js && yarn css:calc",
-    "css:calc": "node scripts/css.calc.js"
+    "build": "node scripts/sd.build.js && npm run css:calc",
+    "css:calc": "node scripts/css.calc.js",
+    "verify": "node scripts/verify-build.js"
   },
-  "version": "0.19.0",
+  "version": "1.0.0",
   "files": [
     "css/",
     "js/"
-  ]
+  ],
+  "exports": {
+    "./css/*": "./css/*",
+    "./js/*": "./js/*",
+    "./package.json": "./package.json"
+  }
 }

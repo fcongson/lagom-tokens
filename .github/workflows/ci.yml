@@ -1,0 +1,32 @@
+name: CI
+
+run-name: ${{ github.actor }} is verifying the token build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Style Dictionary v5 requires Node >= 22.
+          node-version: "22"
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install --frozen-lockfile
+      - name: Build tokens
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
+      - name: Verify build output
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: verify

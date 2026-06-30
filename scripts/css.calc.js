@@ -1,5 +1,13 @@
-const fs = require("fs");
-const path = require("path");
+// Style Dictionary's css/variables format still doesn't wrap math
+// expressions in calc() when outputReferences is on (a long-standing
+// upstream limitation, unresolved as of Style Dictionary v5 - see
+// https://github.com/style-dictionary/style-dictionary/issues/1055).
+// This keeps token math expressed as live CSS custom property references
+// (e.g. `--lagom-core-dimension-xs: var(--lagom-core-dimension-xxs) * var(--lagom-core-dimension-scale);`)
+// instead of baking in a static value, by wrapping the raw expression in calc()
+// after Style Dictionary writes the file.
+import fs from "fs";
+import path from "path";
 
 // Function to wrap CSS custom properties with calc for multiplication
 function wrapMultiplicationWithCalc(line) {

@@ -1,7 +1,7 @@
-const { registerTransforms } = require("@tokens-studio/sd-transforms");
-const StyleDictionary = require("style-dictionary");
+import StyleDictionary from "style-dictionary";
+import { register } from "@tokens-studio/sd-transforms";
 
-registerTransforms(StyleDictionary);
+register(StyleDictionary, { excludeParentKeys: true });
 
 const VARIABLES = [
   { set: "core", destination: "core" },
@@ -37,6 +37,17 @@ const THEMES = [
   },
 ];
 
+// Composite (object-value) token types whose sub-properties get assembled
+// into a single CSS shorthand declaration (e.g. `typography` -> the CSS
+// `font` shorthand). Style Dictionary's css/variables format can't keep a
+// var() reference *and* an embedded math expression in the same shorthand
+// piece (CSS has no exponent operator for calc()), so these are fully
+// resolved to literal values instead of left as references. Every other
+// token keeps its var() reference so themes/overrides keep working.
+const COMPOSITE_TYPES = ["typography", "shadow", "border"];
+const outputReferences = (token) =>
+  !COMPOSITE_TYPES.includes(token.original?.$type);
+
 /**
  * Get common css config for style dictionary
  */
@@ -46,24 +57,21 @@ const getCssConfig = ({
   destination,
   filter,
   fileHeader,
-  outputReferences,
   selector,
 }) => ({
   transforms: [
     "ts/descriptionToComment",
-    // ...(outputReferences ? ["css/calc"] : ["ts/resolveMath"]),
-    // "ts/resolveMath",
-    // "ts/size/px",
+    "ts/resolveMath",
     "ts/opacity",
     "ts/size/lineheight",
     "ts/typography/fontWeight",
     "ts/color/modifiers",
     "ts/size/css/letterspacing",
     "ts/color/css/hexrgba",
-    "ts/typography/css/shorthand",
-    "ts/shadow/css/shorthand",
-    "ts/border/css/shorthand",
-    "name/cti/kebab",
+    "typography/css/shorthand",
+    "shadow/css/shorthand",
+    "border/css/shorthand",
+    "name/kebab",
   ],
   prefix: "lagom",
   buildPath: `css/${buildPathSubdirectory}/`,
@@ -99,27 +107,10 @@ const getJsConfig = ({ buildPathSubdirectory, destination, filter }) => ({
 });
 
 /**
- * Get common json config for style dictionary
- */
-
-const getJsonConfig = ({ buildPathSubdirectory, destination, filter }) => ({
-  transformGroup: "tokens-studio",
-  prefix: "lagom",
-  buildPath: `json/${buildPathSubdirectory}/`,
-  files: [
-    {
-      destination: `${destination}.json`,
-      format: "json",
-      filter,
-    },
-  ],
-});
-
-/**
  * Build token set variables
  */
 
-VARIABLES.forEach(({ set, selector, references }) => {
+for (const { set, selector, references } of VARIABLES) {
   const buildPathSubdirectory = "variables";
   const filter = (token) => token.isSource;
   const referenceNotice = references?.length
@@ -129,55 +120,44 @@ VARIABLES.forEach(({ set, selector, references }) => {
     ...defaultMessage,
     ...referenceNotice,
   ];
-  const sd = StyleDictionary.extend({
+  const sd = new StyleDictionary({
     include: references?.map((set) => `tokens/${set}.js`),
     source: [`tokens/${set}.js`],
+    preprocessors: ["tokens-studio"],
     platforms: {
       css: getCssConfig({
         buildPathSubdirectory,
         destination: set,
         filter,
         fileHeader,
-        outputReferences: true,
         selector,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: set, filter }),
-      // json: getJsonConfig({ buildPathSubdirectory, destination: set, filter }),
     },
   });
-  sd.cleanAllPlatforms();
-  sd.buildAllPlatforms();
-});
+  await sd.cleanAllPlatforms();
+  await sd.buildAllPlatforms();
+}
 
 /**
  * Build themes
  */
 
-THEMES.forEach(({ set, output, selector, references }) => {
+for (const { set, output, selector, references } of THEMES) {
   const buildPathSubdirectory = "theme";
-  // const filter = (token) => token.isSource;
-  // const referenceNotice = references?.length
-  //   ? ["", `References variables: ${references.join(", ")}`]
-  //   : [];
-  // const fileHeader = (defaultMessage) => [
-  //   ...defaultMessage,
-  //   ...referenceNotice,
-  // ];
-  const sd = StyleDictionary.extend({
+  const sd = new StyleDictionary({
     include: references?.map((set) => `tokens/${set}.js`),
     source: [`tokens/${set}.js`],
+    preprocessors: ["tokens-studio"],
     platforms: {
       css: getCssConfig({
         buildPathSubdirectory,
         destination: output,
-        // filter,
-        // fileHeader,
-        outputReferences: true,
         selector,
       }),
       js: getJsConfig({ buildPathSubdirectory, destination: output }),
     },
   });
-  sd.cleanAllPlatforms();
-  sd.buildAllPlatforms();
-});
+  await sd.cleanAllPlatforms();
+  await sd.buildAllPlatforms();
+}
