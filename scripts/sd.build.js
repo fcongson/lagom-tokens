@@ -39,14 +39,27 @@ const THEMES = [
 
 // Composite (object-value) token types whose sub-properties get assembled
 // into a single CSS shorthand declaration (e.g. `typography` -> the CSS
-// `font` shorthand). Style Dictionary's css/variables format can't keep a
-// var() reference *and* an embedded math expression in the same shorthand
-// piece (CSS has no exponent operator for calc()), so these are fully
-// resolved to literal values instead of left as references. Every other
-// token keeps its var() reference so themes/overrides keep working.
+// `font` shorthand). Most of these are fine as var()/calc() reference
+// chains, same as any other token. The one case that isn't: a sub-value
+// using exponent math (e.g. `{core.fontSizes.body}*(1.5^5)`), because CSS
+// calc() has no exponent operator, so it can't be expressed live. Only
+// flatten a composite token to a literal when one of its sub-values
+// actually contains "^" - every other token (composite or not) keeps its
+// var() reference so themes/overrides keep working.
 const COMPOSITE_TYPES = ["typography", "shadow", "border"];
-const outputReferences = (token) =>
-  !COMPOSITE_TYPES.includes(token.original?.$type);
+
+function hasExponentMath(value) {
+  if (typeof value === "string") return value.includes("^");
+  if (value && typeof value === "object") {
+    return Object.values(value).some(hasExponentMath);
+  }
+  return false;
+}
+
+const outputReferences = (token) => {
+  if (!COMPOSITE_TYPES.includes(token.original?.$type)) return true;
+  return !hasExponentMath(token.original?.$value);
+};
 
 /**
  * Get common css config for style dictionary
