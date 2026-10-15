@@ -1,5 +1,18 @@
 # lagom-tokens: Migration to the W3C DTCG Token Spec
 
+> This is the plan as written **before** the migration. The "Current state (baseline)" section describes the pre-migration repo. The migration shipped as v1.0.0. See [Outcome](#outcome) for where the result differs from the plan.
+
+## Outcome
+
+What shipped, compared with the target state and phases below:
+
+- **Done as planned:** `tokens/tokens.studio.json` converted to DTCG. `style-dictionary@^5.5.0` and `@tokens-studio/sd-transforms@^2.0.3`, with `scripts/sd.build.js` rewritten against the async v5 API and the `tokens-studio` preprocessor. Build scripts and `tokens/*.js` converted to ESM. `package.json` has `"type": "module"`, an `exports` map for `css/*` and `js/*`, and version 1.0.0. The stale `yarn-error.log` and dead `getJsonConfig` code are gone. A CI workflow runs on pushes and PRs.
+- **`engines.node` is `>=22`, not `>=18`.** Style Dictionary v5 requires Node 22. CI and the release workflow pin Node 22.
+- **`scripts/css.calc.js` was kept.** `ts/resolveMath` resolves math to literals, but with `outputReferences` on, Style Dictionary still writes the unresolved `var() * var()` expression without wrapping it in `calc()`. The script is still needed to keep those values live references. Composite tokens whose sub-values use `^` exponent math (no `calc()` equivalent) are output as resolved literals instead, through a per-token `outputReferences` function in `sd.build.js`.
+- **No `json/` output.** The dead code was deleted, not wired up.
+- **No snapshot tests.** Verification was a one-time diff against the pre-migration build. The changes found were cosmetic (hex case, comment style), plus a `px` unit on `paragraphSpacing` in JS output. At first all typography composites were resolved to literals. A later change narrowed that to only the tokens that use `^`. The committed check is `scripts/verify-build.js` (`npm run verify`), a smoke test for missing or empty files, unresolved `{...}` references and raw math outside `calc()`. It does not diff against a snapshot.
+- **Not done:** `lint`/`format`/`test` scripts, Changesets/CHANGELOG, `.nvmrc`.
+
 ## Why
 
 The "modern spec" for design tokens is the [W3C Design Tokens Format Module (DTCG)](https://www.designtokens.org/tr/drafts/format/), which reached its first stable release (2025.10) in October 2025. It standardizes tokens on `$value`/`$type`/`$description` instead of the legacy `value`/`type`/`comment` keys that Tokens Studio and `lagom-tokens` currently use. Figma, Tokens Studio, Style Dictionary, and Terrazzo all now support it natively, which is the real payoff: less custom glue code, and tokens that aren't locked to one tool's dialect.
