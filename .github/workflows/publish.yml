@@ -1,17 +1,30 @@
 name: Publish
 
-run-name: ${{ github.actor }} is publishing ${{ github.ref_name }}
+run-name: ${{ github.actor }} is publishing ${{ inputs.tag || github.ref_name }}
 
 # Push a tag named after the package and its version:
 #   lagom-tokens@2.0.0   publishes packages/lagom-tokens
 #   lagom-brands@1.0.0   publishes packages/lagom-brands
 # The version in the tag must match the package's package.json.
+#
+# To publish a tag again (say, after a failed run), use "Run workflow" on
+# the Actions tab and give it the tag. It checks out and publishes that tag.
+#
+# Publishes with the workflow's own GITHUB_TOKEN, so there's no personal
+# token to expire. Each package must give this repository write access
+# (package settings, "Manage Actions access"); packages first published from
+# this workflow get it automatically.
 
 on:
   push:
     tags:
       - "lagom-tokens@*"
       - "lagom-brands@*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish, e.g. lagom-tokens@2.0.0"
+        required: true
 
 jobs:
   publish:
@@ -21,6 +34,8 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -35,9 +50,15 @@ jobs:
         run: yarn ci
       - name: Find the package
         id: pkg
+        env:
+          TAG: ${{ inputs.tag || github.ref_name }}
         run: |
-          name="${GITHUB_REF_NAME%@*}"
-          version="${GITHUB_REF_NAME#*@}"
+          case "$TAG" in
+            lagom-tokens@*|lagom-brands@*) ;;
+            *) echo "\"$TAG\" isn't a lagom-tokens@x or lagom-brands@x tag." >&2; exit 1 ;;
+          esac
+          name="${TAG%@*}"
+          version="${TAG#*@}"
           dir="packages/$name"
           actual="$(node -p "require('./$dir/package.json').version")"
           if [ "$actual" != "$version" ]; then
@@ -49,4 +70,4 @@ jobs:
         working-directory: ${{ steps.pkg.outputs.dir }}
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
