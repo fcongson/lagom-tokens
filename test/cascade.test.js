@@ -16,7 +16,7 @@ const FILES = {
   base: "packages/lagom-tokens/css/lagom.css",
   fern: "packages/lagom-brands/fern/css/fern.css",
   waypoint: "packages/lagom-brands/waypoint/css/waypoint.css",
-  acme: "examples/white-label.css",
+  rouge: "examples/white-label.css",
 };
 const style = (ids) =>
   ids.map((id) => `<style>${fs.readFileSync(path.join(ROOT, FILES[id]), "utf8")}</style>`).join("");
@@ -48,12 +48,12 @@ const cases = [
 ];
 
 // The example white label, by CSS custom property name.
-const acme = [
-  ["White label light", 'data-lagom-brand="acme"', "", "--lagom-semantic-color-accent-default", "#006a65"],
-  ["White label dark section", 'data-lagom-brand="acme"', 'data-lagom-theme="dark"', "--lagom-semantic-color-accent-default", "#6db8b4"],
-  ["White label, more contrast", 'data-lagom-brand="acme" data-lagom-contrast="more"', "", "--lagom-semantic-color-accent-default", "#0a5c58"],
-  ["White label dark, more section", 'data-lagom-brand="acme" data-lagom-theme="dark"', 'data-lagom-contrast="more"', "--lagom-semantic-color-accent-default", "#87c4c0"],
-  ["White label keeps Base's text", 'data-lagom-brand="acme"', "", "--lagom-semantic-color-fg-default", expect("base", "default", ROLE("fg.default"))],
+const rouge = [
+  ["White label light", 'data-lagom-brand="rouge"', "", "--lagom-semantic-color-accent-default", "#b4281f"],
+  ["White label dark section", 'data-lagom-brand="rouge"', 'data-lagom-theme="dark"', "--lagom-semantic-color-accent-default", "#e79690"],
+  ["White label, more contrast", 'data-lagom-brand="rouge" data-lagom-contrast="more"', "", "--lagom-semantic-color-accent-default", "#9d241c"],
+  ["White label dark, more section", 'data-lagom-brand="rouge" data-lagom-theme="dark"', 'data-lagom-contrast="more"', "--lagom-semantic-color-accent-default", "#eda7a3"],
+  ["White label keeps Base's text", 'data-lagom-brand="rouge"', "", "--lagom-semantic-color-fg-default", expect("base", "default", ROLE("fg.default"))],
 ];
 
 const browser = await chromium.launch();
@@ -89,8 +89,8 @@ for (const order of [
 }
 
 const page = await browser.newPage();
-for (const [label, html, section, property, expected] of acme) {
-  const got = await read(page, html, section, property, ["base", "acme"]);
+for (const [label, html, section, property, expected] of rouge) {
+  const got = await read(page, html, section, property, ["base", "rouge"]);
   report(got.toLowerCase() === expected.toLowerCase(), label, got, expected);
 }
 await page.close();
@@ -102,7 +102,7 @@ for (const [label, html, files, expected] of [
   ["prefers-contrast, Fern", 'data-lagom-brand="fern"', ["base", "fern"], expect("fern", "more", ROLE("accent.default"))],
   ["prefers-contrast, Base dark", 'data-lagom-theme="dark"', ["base", "fern"], expect("base", "more-dark", ROLE("accent.default"))],
   ["prefers-contrast, Base light", "", ["base", "fern"], expect("base", "more", ROLE("accent.default"))],
-  ["prefers-contrast, white label", 'data-lagom-brand="acme"', ["base", "acme"], "#0a5c58"],
+  ["prefers-contrast, white label", 'data-lagom-brand="rouge"', ["base", "rouge"], "#9d241c"],
 ]) {
   const got = await read(media, html, "", "--lagom-semantic-color-accent-default", files);
   report(got.toLowerCase() === expected.toLowerCase(), label, got, expected);

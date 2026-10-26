@@ -1,6 +1,6 @@
 /*
- * A minimal white label: Base, with a teal accent.
- * Set data-lagom-brand="acme" on <html>, then load this after lagom.css.
+ * A minimal white label, "rouge" (French for red): Base, with a red accent.
+ * Set data-lagom-brand="rouge" on <html>, then load this after lagom.css.
  * Check it with: npx check-brand examples/white-label.css
  *
  * Four blocks, one per mode and contrast, plus the same increased-contrast
@@ -13,70 +13,70 @@
  */
 
 /* Light */
-[data-lagom-brand~="acme"] {
-  --acme-teal-20: #123633;
-  --acme-teal-35: #0a5c58;
-  --acme-teal-40: #006a65;
-  --acme-teal-70: #6db8b4;
-  --acme-teal-75: #87c4c0;
-  --acme-teal-90: #d0e7e5;
-  --lagom-semantic-color-accent-default: var(--acme-teal-40);
-  --lagom-semantic-color-accent-fg: var(--acme-teal-40);
-  --lagom-semantic-color-accent-bg: var(--acme-teal-90);
-  --lagom-semantic-color-focus-ring: var(--acme-teal-40);
+[data-lagom-brand~="rouge"] {
+  --rouge-red-20: #591c14;
+  --rouge-red-35: #9d241c;
+  --rouge-red-40: #b4281f;
+  --rouge-red-70: #e79690;
+  --rouge-red-75: #eda7a3;
+  --rouge-red-90: #fadcda;
+  --lagom-semantic-color-accent-default: var(--rouge-red-40);
+  --lagom-semantic-color-accent-fg: var(--rouge-red-40);
+  --lagom-semantic-color-accent-bg: var(--rouge-red-90);
+  --lagom-semantic-color-focus-ring: var(--rouge-red-40);
 }
 
 /* Dark */
-[data-lagom-theme~="dark"] [data-lagom-brand~="acme"],
-[data-lagom-brand~="acme"] [data-lagom-theme~="dark"],
-[data-lagom-brand~="acme"][data-lagom-theme~="dark"] {
-  --lagom-semantic-color-accent-default: var(--acme-teal-70);
-  --lagom-semantic-color-accent-fg: var(--acme-teal-70);
-  --lagom-semantic-color-accent-bg: var(--acme-teal-20);
-  --lagom-semantic-color-focus-ring: var(--acme-teal-70);
+[data-lagom-theme~="dark"] [data-lagom-brand~="rouge"],
+[data-lagom-brand~="rouge"] [data-lagom-theme~="dark"],
+[data-lagom-brand~="rouge"][data-lagom-theme~="dark"] {
+  --lagom-semantic-color-accent-default: var(--rouge-red-70);
+  --lagom-semantic-color-accent-fg: var(--rouge-red-70);
+  --lagom-semantic-color-accent-bg: var(--rouge-red-20);
+  --lagom-semantic-color-focus-ring: var(--rouge-red-70);
 }
 
 /* Light, increased contrast (AAA: 7:1 text, 4.5:1 non-text) */
-[data-lagom-contrast~="more"] [data-lagom-brand~="acme"],
-[data-lagom-brand~="acme"] [data-lagom-contrast~="more"],
-[data-lagom-brand~="acme"][data-lagom-contrast~="more"] {
-  --lagom-semantic-color-accent-default: var(--acme-teal-35);
-  --lagom-semantic-color-accent-fg: var(--acme-teal-35);
-  --lagom-semantic-color-focus-ring: var(--acme-teal-35);
+[data-lagom-contrast~="more"] [data-lagom-brand~="rouge"],
+[data-lagom-brand~="rouge"] [data-lagom-contrast~="more"],
+[data-lagom-brand~="rouge"][data-lagom-contrast~="more"] {
+  --lagom-semantic-color-accent-default: var(--rouge-red-35);
+  --lagom-semantic-color-accent-fg: var(--rouge-red-35);
+  --lagom-semantic-color-focus-ring: var(--rouge-red-35);
 }
 
 /* Dark, increased contrast */
-[data-lagom-theme~="dark"][data-lagom-contrast~="more"] [data-lagom-brand~="acme"],
-[data-lagom-theme~="dark"] [data-lagom-contrast~="more"] [data-lagom-brand~="acme"],
-[data-lagom-contrast~="more"] [data-lagom-theme~="dark"] [data-lagom-brand~="acme"],
-[data-lagom-brand~="acme"][data-lagom-contrast~="more"] [data-lagom-theme~="dark"],
-[data-lagom-brand~="acme"] [data-lagom-contrast~="more"] [data-lagom-theme~="dark"],
-[data-lagom-contrast~="more"] [data-lagom-brand~="acme"] [data-lagom-theme~="dark"],
-[data-lagom-contrast~="more"] [data-lagom-brand~="acme"][data-lagom-theme~="dark"],
-[data-lagom-brand~="acme"][data-lagom-theme~="dark"] [data-lagom-contrast~="more"],
-[data-lagom-brand~="acme"] [data-lagom-theme~="dark"] [data-lagom-contrast~="more"],
-[data-lagom-theme~="dark"] [data-lagom-brand~="acme"] [data-lagom-contrast~="more"],
-[data-lagom-theme~="dark"] [data-lagom-brand~="acme"][data-lagom-contrast~="more"],
-[data-lagom-brand~="acme"] [data-lagom-theme~="dark"][data-lagom-contrast~="more"],
-[data-lagom-brand~="acme"][data-lagom-theme~="dark"][data-lagom-contrast~="more"] {
-  --lagom-semantic-color-accent-default: var(--acme-teal-75);
-  --lagom-semantic-color-accent-fg: var(--acme-teal-75);
-  --lagom-semantic-color-focus-ring: var(--acme-teal-75);
+[data-lagom-theme~="dark"][data-lagom-contrast~="more"] [data-lagom-brand~="rouge"],
+[data-lagom-theme~="dark"] [data-lagom-contrast~="more"] [data-lagom-brand~="rouge"],
+[data-lagom-contrast~="more"] [data-lagom-theme~="dark"] [data-lagom-brand~="rouge"],
+[data-lagom-brand~="rouge"][data-lagom-contrast~="more"] [data-lagom-theme~="dark"],
+[data-lagom-brand~="rouge"] [data-lagom-contrast~="more"] [data-lagom-theme~="dark"],
+[data-lagom-contrast~="more"] [data-lagom-brand~="rouge"] [data-lagom-theme~="dark"],
+[data-lagom-contrast~="more"] [data-lagom-brand~="rouge"][data-lagom-theme~="dark"],
+[data-lagom-brand~="rouge"][data-lagom-theme~="dark"] [data-lagom-contrast~="more"],
+[data-lagom-brand~="rouge"] [data-lagom-theme~="dark"] [data-lagom-contrast~="more"],
+[data-lagom-theme~="dark"] [data-lagom-brand~="rouge"] [data-lagom-contrast~="more"],
+[data-lagom-theme~="dark"] [data-lagom-brand~="rouge"][data-lagom-contrast~="more"],
+[data-lagom-brand~="rouge"] [data-lagom-theme~="dark"][data-lagom-contrast~="more"],
+[data-lagom-brand~="rouge"][data-lagom-theme~="dark"][data-lagom-contrast~="more"] {
+  --lagom-semantic-color-accent-default: var(--rouge-red-75);
+  --lagom-semantic-color-accent-fg: var(--rouge-red-75);
+  --lagom-semantic-color-focus-ring: var(--rouge-red-75);
 }
 
 /* The same, for prefers-contrast: more. Keep this after the blocks above. */
 @media (prefers-contrast: more) {
-  [data-lagom-brand~="acme"] {
-    --lagom-semantic-color-accent-default: var(--acme-teal-35);
-    --lagom-semantic-color-accent-fg: var(--acme-teal-35);
-    --lagom-semantic-color-focus-ring: var(--acme-teal-35);
+  [data-lagom-brand~="rouge"] {
+    --lagom-semantic-color-accent-default: var(--rouge-red-35);
+    --lagom-semantic-color-accent-fg: var(--rouge-red-35);
+    --lagom-semantic-color-focus-ring: var(--rouge-red-35);
   }
 
-  [data-lagom-theme~="dark"] [data-lagom-brand~="acme"],
-  [data-lagom-brand~="acme"] [data-lagom-theme~="dark"],
-  [data-lagom-brand~="acme"][data-lagom-theme~="dark"] {
-    --lagom-semantic-color-accent-default: var(--acme-teal-75);
-    --lagom-semantic-color-accent-fg: var(--acme-teal-75);
-    --lagom-semantic-color-focus-ring: var(--acme-teal-75);
+  [data-lagom-theme~="dark"] [data-lagom-brand~="rouge"],
+  [data-lagom-brand~="rouge"] [data-lagom-theme~="dark"],
+  [data-lagom-brand~="rouge"][data-lagom-theme~="dark"] {
+    --lagom-semantic-color-accent-default: var(--rouge-red-75);
+    --lagom-semantic-color-accent-fg: var(--rouge-red-75);
+    --lagom-semantic-color-focus-ring: var(--rouge-red-75);
   }
 }
