@@ -1,14 +1,14 @@
 name: Publish
 
-run-name: ${{ github.actor }} is publishing ${{ inputs.tag || github.ref_name }}
+run-name: ${{ github.actor }} is publishing ${{ github.ref_name }}
 
 # Push a tag named after the package and its version:
 #   lagom-tokens@2.0.0   publishes packages/lagom-tokens
 #   lagom-brands@1.0.0   publishes packages/lagom-brands
 # The version in the tag must match the package's package.json.
 #
-# To publish a tag again (say, after a failed run), use "Run workflow" on
-# the Actions tab and give it the tag. It checks out and publishes that tag.
+# To publish a tag again (say, after a failed run), delete it and push it
+# again on a commit that has the fix.
 #
 # Publishes with the workflow's own GITHUB_TOKEN, so there's no personal
 # token to expire. Each package must give this repository write access
@@ -20,11 +20,6 @@ on:
     tags:
       - "lagom-tokens@*"
       - "lagom-brands@*"
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: "Tag to publish, e.g. lagom-tokens@2.0.0"
-        required: true
 
 jobs:
   publish:
@@ -34,8 +29,6 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.tag || github.ref }}
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -51,7 +44,7 @@ jobs:
       - name: Find the package
         id: pkg
         env:
-          TAG: ${{ inputs.tag || github.ref_name }}
+          TAG: ${{ github.ref_name }}
         run: |
           case "$TAG" in
             lagom-tokens@*|lagom-brands@*) ;;
