@@ -1,0 +1,10 @@
+{
+  "component": {
+    "Button": {
+      "borderRadius": {
+        "$value": "{core.borderRadius.xxl}",
+        "$type": "borderRadius"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "semantic": {
+    "color": {
+      "accent": {
+        "fg": {
+          "$value": "{palette.olive.35}",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "{palette.olive.35}",
+          "$type": "color"
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.olive.20}",
+        "$type": "color"
+      }
+    }
+  }
+}

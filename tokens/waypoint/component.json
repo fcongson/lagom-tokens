@@ -1,0 +1,16 @@
+{
+  "component": {
+    "Button": {
+      "borderRadius": {
+        "$value": "3px",
+        "$type": "borderRadius"
+      }
+    },
+    "PageHeader": {
+      "marginBottom": {
+        "$value": "{core.spacing.xxl}",
+        "$type": "spacing"
+      }
+    }
+  }
+}

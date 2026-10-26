@@ -1,6 +1,6 @@
 name: CI
 
-run-name: ${{ github.actor }} is verifying the token build
+run-name: ${{ github.actor }} is checking the tokens
 
 on:
   push:
@@ -9,24 +9,25 @@ on:
   pull_request:
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
-          # Style Dictionary v5 requires Node >= 22.
           node-version: "22"
-      - name: Run install
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: install --frozen-lockfile
-      - name: Build tokens
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
-      - name: Verify build output
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: verify
+          cache: yarn
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Install Chromium for the cascade test
+        run: npx playwright install --with-deps chromium
+      - name: Palettes match their anchors
+        run: yarn ramps:check
+      - name: Build
+        run: yarn build
+      - name: Every brand meets the role contract
+        run: yarn check-brand && yarn check-brand examples/white-label.css
+      - name: Build output is complete and resolved
+        run: yarn verify
+      - name: Cascade works in a browser
+        run: yarn test:cascade

@@ -1,0 +1,15 @@
+This repository holds two kinds of work under different terms.
+
+MIT (LICENSES/MIT.txt, and the LICENSE file in each folder):
+  - Base and the role contract: tokens/base/, packages/lagom-tokens/
+  - The build and check tooling: scripts/, test/, brands.config.js,
+    examples/, and everything else not listed below
+
+All rights reserved (LICENSES/LicenseRef-AllRightsReserved.txt, and the
+LICENSE file in each folder):
+  - The Fern and Waypoint brands: tokens/fern/, tokens/waypoint/,
+    packages/lagom-brands/
+
+REUSE.toml records the same split in machine-readable form.
+
+Copyright (c) 2026 Frank Congson

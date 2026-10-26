@@ -1,0 +1,38 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "tertiary": {
+          "$value": "{palette.grey.35}",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "fg": {
+          "$value": "{palette.navy.35}",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "{palette.navy.35}",
+          "$type": "color"
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.navy.35}",
+        "$type": "color"
+      }
+    },
+    "border": {
+      "width": {
+        "$value": "2px",
+        "$type": "borderWidth"
+      }
+    },
+    "focusRing": {
+      "width": {
+        "$value": "3px",
+        "$type": "borderWidth"
+      }
+    }
+  }
+}

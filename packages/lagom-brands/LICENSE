@@ -1,0 +1,12 @@
+Copyright (c) 2026 Frank Congson. All rights reserved.
+
+These files make up the Fern and Waypoint brands: their colours, type,
+and other design decisions, as design tokens and the CSS and JS built
+from them. They are published so that Frank Congson's own sites and
+projects can install them. No licence is granted to use, copy, modify,
+or distribute them for any other purpose.
+
+To build your own brand on Lagom, start from Base (MIT, in
+packages/lagom-tokens and tokens/base), not from these files.
+
+Contact: https://github.com/fcongson

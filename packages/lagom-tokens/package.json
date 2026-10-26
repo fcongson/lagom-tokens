@@ -1,0 +1,34 @@
+{
+  "name": "@fcongson/lagom-tokens",
+  "version": "2.0.0",
+  "description": "Lagom's design tokens: the role contract and the Base brand, as CSS custom properties and JS.",
+  "author": "Frank Congson",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fcongson/lagom-tokens",
+    "directory": "packages/lagom-tokens"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "css/",
+    "js/",
+    "bin/",
+    "contract.json",
+    "LICENSE"
+  ],
+  "exports": {
+    "./css/*": "./css/*",
+    "./js/*": "./js/*",
+    "./package.json": "./package.json",
+    "./contract.json": "./contract.json"
+  },
+  "bin": {
+    "check-brand": "bin/check-brand.js"
+  }
+}

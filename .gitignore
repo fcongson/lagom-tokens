@@ -133,3 +133,6 @@ dist
 css/
 js/
 json/
+
+# build output
+packages/lagom-tokens/contract.json

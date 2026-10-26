@@ -1,56 +1,62 @@
 # lagom-tokens
 
-Design tokens used to support [lagom-ui](https://github.com/fcongson/lagom-ui)
+Design tokens for [lagom-ui](https://github.com/fcongson/lagom-ui), as a role contract that any brand can fill in.
 
-Tokens are authored in the [W3C DTCG](https://www.designtokens.org/tr/drafts/format/) format (`$value`/`$type`/`$description`) and built with [Style Dictionary](https://styledictionary.com/) v5 + [`@tokens-studio/sd-transforms`](https://github.com/tokens-studio/sd-transforms) v2. See [`tokens/README.md`](./tokens/README.md) for how the token files fit together, and [`docs/dtcg-migration-plan.md`](./docs/dtcg-migration-plan.md) for the plan behind the DTCG migration (its "Outcome" section records what actually shipped).
+This repo publishes two packages:
 
-## Requirements
+- [`@fcongson/lagom-tokens`](./packages/lagom-tokens) (MIT): the contract and **Base**, the brand every other brand overrides. Use it to build your own brand.
+- [`@fcongson/lagom-brands`](./packages/lagom-brands) (all rights reserved): Frank Congson's brands, **Fern** (frankcongson.com, frankcongson.dev) and **Waypoint** (heythereeverywhere.com). Public so Frank's sites can install it, but not licensed for reuse.
 
-Node.js >= 22 (required by Style Dictionary v5). Dependencies are installed with Yarn (classic, `yarn.lock`):
+See [LICENSE](./LICENSE) for which folders are under which terms, and [MIGRATION.md](./MIGRATION.md) for upgrading from 1.x.
 
-```bash
-yarn install
+## Using the tokens
+
+```css
+@import "@fcongson/lagom-tokens/css/lagom.css";
+/* Optional: a brand, loaded after lagom.css */
+@import "@fcongson/lagom-brands/fern/css/fern.css";
 ```
 
-## Scripts
+Three attributes choose what an element shows. Each can go on `<html>` or on any element inside it, so a section can switch on its own:
 
-- `build` — generates `css/` and `js/` from `tokens/tokens.studio.json`: runs `scripts/sd.build.js` (Style Dictionary), then `css:calc`.
-- `css:calc` — post-processes the generated CSS, wrapping token math (e.g. `var(--a) * var(--b)`) in `calc()`. Run automatically by `build`.
-- `verify` — smoke-tests the generated `css/`/`js/` output (every expected file present and non-empty, no unresolved references, no raw math left outside `calc()`).
+- `data-lagom-brand="fern"`: the brand (no attribute: Base)
+- `data-lagom-theme="dark"`: the mode (no attribute: light)
+- `data-lagom-contrast="more"`: increased contrast (also applied by the `prefers-contrast: more` media query)
 
-## Output
+Load order between the files doesn't matter: Base's selectors have zero specificity, so any brand outranks it.
 
-`css/` and `js/` are build output (gitignored, generated at publish time). All CSS custom properties and JS exports are prefixed with `lagom` (e.g. `--lagom-core-dimension-xs`, `lagomCoreDimensionXs`).
+Every role is a CSS custom property, `--lagom-semantic-color-fg-default` for example. Palette colours are prefixed by brand: `--lagom-grey-55` (Base), `--fern-olive-45`, `--waypoint-brick-40`. JS modules export the same tokens, fully resolved, per variant: `js/light.js`, `js/dark.js`, `js/more.js`, `js/more-dark.js`.
 
-- `css/variables/` and `js/variables/` — one file per token set: `core`, `semantic`, `semantic.light`, `semantic.dark`, `component` (CSS files are prefixed with `_`, e.g. `_core.css`). Each file contains only its own set's tokens. CSS values keep `var()` references to the sets they depend on (listed in each file's header), so those files must be loaded too.
-- `css/theme/` and `js/theme/` — `light` and `dark` themes. Each is self-contained: every token from `core`, `semantic`, the matching light/dark set, and `component`.
+## Making your own brand
 
-Light tokens use the `:root` selector; dark tokens use `[data-lagom-theme~="dark"]`.
+Start from Base and override roles in your own CSS. [`examples/white-label.css`](./examples/white-label.css) is a complete example. Then check it:
 
-The package is published to GitHub Packages as `@fcongson/lagom-tokens` (see `.npmrc`). Files are imported by path, e.g. `@fcongson/lagom-tokens/css/theme/_light.css` or `@fcongson/lagom-tokens/js/variables/core.js`.
+```bash
+npx check-brand your-brand.css
+```
+
+`check-brand` comes with `@fcongson/lagom-tokens`. It checks that every role still resolves, that anything you set for light you also set for dark, that your increased-contrast blocks match your `prefers-contrast` blocks, and that every text and non-text pair passes contrast: AA normally, AAA (7:1 text, 4.5:1 non-text) with increased contrast. Each role's requirements are in its description in [`tokens/base/semantic.json`](./tokens/base/semantic.json).
+
+## Working in this repo
+
+Node.js >= 22 and Yarn (classic). `yarn install`, then:
+
+- `yarn ramps`: regenerate each brand's `palette.json` from its anchor colours. `yarn ramps:check` fails if one is out of date.
+- `yarn build`: build both packages into `packages/*/css` and `packages/*/js`, plus `packages/lagom-tokens/contract.json` (build output, gitignored).
+- `yarn check-brand [brand | file.css]`: check every brand (or one, or a CSS file) against the contract.
+- `yarn suggest-more <brand> [--write]`: suggest increased-contrast values for a brand from its own palette. Review them by eye before committing.
+- `yarn verify`: smoke-test the build output.
+- `yarn test:cascade`: check the built CSS in Chromium (`npx playwright install chromium` once).
+- `yarn ci`: all of the above, as CI runs it.
+
+See [`tokens/README.md`](./tokens/README.md) for how the token sources fit together.
 
 ## Releasing
 
-Bump `version` in `package.json`, then push a matching `v*` tag (e.g. `v1.0.1`). The [Style Dictionary workflow](./.github/workflows/style-dictionary.yml) builds, verifies and publishes the package. See [`.github/workflows/README.md`](./.github/workflows/README.md).
+Each package is versioned and published on its own. Bump `version` in the package's `package.json`, then push a tag named after it: `lagom-tokens@2.0.0` or `lagom-brands@1.0.0`. The [publish workflow](./.github/workflows/publish.yml) runs every check and publishes that package to GitHub Packages. See [`.github/workflows/README.md`](./.github/workflows/README.md).
 
 ## References
 
-[Design Tokens Community Group (W3C DTCG) format spec](https://www.designtokens.org/tr/drafts/format/)
-
-[Style Dictionary](https://styledictionary.com/)
-
-[Style Dictionary — DTCG support](https://styledictionary.com/info/dtcg/)
-
-[Style Dictionary Transforms for Tokens Studio](https://github.com/tokens-studio/sd-transforms)
-
-[Tokens Studio for Figma](https://tokens.studio/)
-
-[Tokens Studio — Token Format: W3C DTCG vs Legacy](https://docs.tokens.studio/manage-settings/token-format)
-
-[Supernova — Figma tokens & CLI](https://learn.supernova.io/latest/releases/november-2022/figma-tokens-and-cli.html)
-
-[Supernova — CLI](https://github.com/Supernova-Studio/cli)
-
-[Supernova — Figma tokens sync](https://github.com/Supernova-Studio/cli/blob/main/docs/figma-tokens-sync.md)
-
-[Supernova — Figma tokens config mapping](https://github.com/Supernova-Studio/cli/blob/main/docs/figma-tokens-sync-mapping-examples.md)
+- [Design Tokens Community Group (W3C DTCG) format](https://www.designtokens.org/tr/drafts/format/)
+- [Tokens Studio for Figma](https://tokens.studio/)
+- [WCAG 2.2 contrast (minimum)](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html) and [enhanced](https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html)

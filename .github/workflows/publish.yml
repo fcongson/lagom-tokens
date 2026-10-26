@@ -1,0 +1,52 @@
+name: Publish
+
+run-name: ${{ github.actor }} is publishing ${{ github.ref_name }}
+
+# Push a tag named after the package and its version:
+#   lagom-tokens@2.0.0   publishes packages/lagom-tokens
+#   lagom-brands@1.0.0   publishes packages/lagom-brands
+# The version in the tag must match the package's package.json.
+
+on:
+  push:
+    tags:
+      - "lagom-tokens@*"
+      - "lagom-brands@*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: yarn
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@fcongson"
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Install Chromium for the cascade test
+        run: npx playwright install --with-deps chromium
+      - name: Check and build
+        run: yarn ci
+      - name: Find the package
+        id: pkg
+        run: |
+          name="${GITHUB_REF_NAME%@*}"
+          version="${GITHUB_REF_NAME#*@}"
+          dir="packages/$name"
+          actual="$(node -p "require('./$dir/package.json').version")"
+          if [ "$actual" != "$version" ]; then
+            echo "Tag says $version but $dir/package.json says $actual." >&2
+            exit 1
+          fi
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+      - name: Publish
+        working-directory: ${{ steps.pkg.outputs.dir }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TOKEN }}
