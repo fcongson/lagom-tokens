@@ -1,0 +1,100 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "default": {
+          "$value": "{palette.grey.5}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.grey.25}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.grey.35}",
+          "$type": "color"
+        }
+      },
+      "bg": {
+        "default": {
+          "$value": "{palette.grey.100}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.grey.95}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.grey.75}",
+          "$type": "color"
+        }
+      },
+      "border": {
+        "default": {
+          "$value": "{palette.grey.15}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.olive.85}",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "default": {
+          "$value": "{palette.olive.45}",
+          "$type": "color"
+        },
+        "fg": {
+          "$value": "{palette.olive.45}",
+          "$type": "color"
+        },
+        "onAccent": {
+          "$value": "{palette.grey.100}",
+          "$type": "color"
+        },
+        "bg": {
+          "$value": "{palette.olive.65}",
+          "$type": "color"
+        }
+      },
+      "button": {
+        "primary": {
+          "bg": {
+            "$value": "{palette.grey.15}",
+            "$type": "color"
+          },
+          "fg": {
+            "$value": "{palette.grey.100}",
+            "$type": "color"
+          }
+        },
+        "secondary": {
+          "bg": {
+            "$value": "transparent",
+            "$type": "color"
+          },
+          "fg": {
+            "$value": "{palette.grey.15}",
+            "$type": "color"
+          }
+        }
+      },
+      "overlay": {
+        "background": {
+          "$value": "{palette.grey.100}",
+          "$type": "color"
+        }
+      },
+      "selection": {
+        "bg": {
+          "$value": "{palette.olive.85}",
+          "$type": "color"
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.olive.30}",
+        "$type": "color"
+      }
+    }
+  }
+}

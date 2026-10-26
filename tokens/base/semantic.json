@@ -1,0 +1,158 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "default": {
+          "$value": "{palette.grey.10}",
+          "$type": "color",
+          "$description": "Body text and headings. Must reach 4.5:1 on every background role, and 9:1 on bg-default (the image focus ring relies on it)."
+        },
+        "secondary": {
+          "$value": "{palette.grey.30}",
+          "$type": "color",
+          "$description": "Supporting text, such as quotes and intros. Must reach 4.5:1 on bg-default and bg-secondary."
+        },
+        "tertiary": {
+          "$value": "{palette.grey.40}",
+          "$type": "color",
+          "$description": "The least prominent text, such as captions and meta. Page background only: must reach 4.5:1 on bg-default. On a band, use fg-secondary."
+        }
+      },
+      "bg": {
+        "default": {
+          "$value": "{palette.grey.100}",
+          "$type": "color",
+          "$description": "The page background."
+        },
+        "secondary": {
+          "$value": "{palette.grey.95}",
+          "$type": "color",
+          "$description": "Bands and panels set off from the page, such as FeaturedSection."
+        },
+        "tertiary": {
+          "$value": "{palette.grey.85}",
+          "$type": "color",
+          "$description": "The most prominent neutral surface."
+        }
+      },
+      "border": {
+        "default": {
+          "$value": "{palette.grey.40}",
+          "$type": "color",
+          "$description": "Dividers and control outlines. Must reach 3:1 against bg-default."
+        },
+        "secondary": {
+          "$value": "{palette.grey.85}",
+          "$type": "color",
+          "$description": "Quieter or decorative rules."
+        }
+      },
+      "accent": {
+        "default": {
+          "$value": "{palette.navy.40}",
+          "$type": "color",
+          "$description": "The brand mark: fills, rules, and highlights."
+        },
+        "fg": {
+          "$value": "{palette.navy.40}",
+          "$type": "color",
+          "$description": "Accent-coloured text and links on bg-default. Must reach 4.5:1 there."
+        },
+        "onAccent": {
+          "$value": "{palette.grey.100}",
+          "$type": "color",
+          "$description": "Text on an accent-default fill. Must reach 4.5:1 on it."
+        },
+        "bg": {
+          "$value": "{palette.navy.90}",
+          "$type": "color",
+          "$description": "A soft accent surface, such as a featured band. fg-default must reach 4.5:1 on it."
+        }
+      },
+      "button": {
+        "primary": {
+          "bg": {
+            "$value": "{semantic.color.accent.default}",
+            "$type": "color",
+            "$description": "Primary button fill. Defaults to accent-default. Must reach 3:1 against bg-default."
+          },
+          "fg": {
+            "$value": "{semantic.color.accent.onAccent}",
+            "$type": "color",
+            "$description": "Primary button text. Must reach 4.5:1 on button-primary-bg."
+          }
+        },
+        "secondary": {
+          "bg": {
+            "$value": "transparent",
+            "$type": "color",
+            "$description": "Secondary button fill."
+          },
+          "fg": {
+            "$value": "{semantic.color.accent.fg}",
+            "$type": "color",
+            "$description": "Secondary button text and border. Must reach 4.5:1 on bg-default."
+          }
+        }
+      },
+      "overlay": {
+        "background": {
+          "$value": "{palette.grey.100}",
+          "$type": "color",
+          "$description": "The wash over images behind text, at opacity-overlay."
+        }
+      },
+      "selection": {
+        "bg": {
+          "$value": "{palette.navy.85}",
+          "$type": "color",
+          "$description": "Text selection highlight. fg-default must reach 4.5:1 on it."
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.navy.40}",
+        "$type": "color",
+        "$description": "Keyboard focus indicator. Must reach 3:1 against bg-default, bg-secondary, bg-tertiary, and accent-bg."
+      }
+    },
+    "opacity": {
+      "overlay": {
+        "$value": "{core.opacity.min}",
+        "$type": "opacity",
+        "$description": "Strength of overlay-background over images."
+      }
+    },
+    "image": {
+      "filter": {
+        "$value": "none",
+        "$type": "other",
+        "$description": "Filter applied to images, such as dimming in dark mode."
+      }
+    },
+    "border": {
+      "width": {
+        "$value": "1px",
+        "$type": "borderWidth",
+        "$description": "Default border width for controls and dividers."
+      }
+    },
+    "focusRing": {
+      "width": {
+        "$value": "2px",
+        "$type": "borderWidth",
+        "$description": "Focus ring thickness."
+      }
+    },
+    "typography": {
+      "body": {
+        "$value": {
+          "fontFamily": "{core.fontFamilies.body}",
+          "fontWeight": "{core.fontWeights.bodyRegular}",
+          "lineHeight": "{core.lineHeights.body}",
+          "fontSize": "{core.fontSizes.body}"
+        },
+        "$type": "typography"
+      }
+    }
+  }
+}

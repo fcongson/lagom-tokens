@@ -1,0 +1,17 @@
+{
+  "semantic": {
+    "color": {},
+    "border": {
+      "width": {
+        "$value": "2px",
+        "$type": "borderWidth"
+      }
+    },
+    "focusRing": {
+      "width": {
+        "$value": "3px",
+        "$type": "borderWidth"
+      }
+    }
+  }
+}

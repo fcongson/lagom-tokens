@@ -1,0 +1,13 @@
+version = 1
+
+[[annotations]]
+path = ["**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Frank Congson"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = ["tokens/fern/**", "tokens/waypoint/**", "packages/lagom-brands/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Frank Congson"
+SPDX-License-Identifier = "LicenseRef-AllRightsReserved"

@@ -1,0 +1,30 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "secondary": {
+          "$value": "{palette.sand.90}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.sand.75}",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "default": {
+          "$value": "{palette.brick.35}",
+          "$type": "color"
+        }
+      },
+      "button": {
+        "primary": {
+          "bg": {
+            "$value": "{palette.brick.75}",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  }
+}

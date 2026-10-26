@@ -1,0 +1,90 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "default": {
+          "$value": "{palette.grey.95}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.grey.80}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.grey.70}",
+          "$type": "color"
+        }
+      },
+      "bg": {
+        "default": {
+          "$value": "{palette.grey.10}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.grey.15}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.grey.25}",
+          "$type": "color"
+        }
+      },
+      "border": {
+        "default": {
+          "$value": "{palette.grey.60}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.grey.25}",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "default": {
+          "$value": "{palette.navy.70}",
+          "$type": "color"
+        },
+        "fg": {
+          "$value": "{palette.navy.70}",
+          "$type": "color"
+        },
+        "onAccent": {
+          "$value": "{palette.grey.10}",
+          "$type": "color"
+        },
+        "bg": {
+          "$value": "{palette.navy.20}",
+          "$type": "color"
+        }
+      },
+      "overlay": {
+        "background": {
+          "$value": "{palette.grey.10}",
+          "$type": "color"
+        }
+      },
+      "selection": {
+        "bg": {
+          "$value": "{palette.navy.30}",
+          "$type": "color"
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.navy.70}",
+        "$type": "color"
+      }
+    },
+    "opacity": {
+      "overlay": {
+        "$value": "{core.opacity.low}",
+        "$type": "opacity"
+      }
+    },
+    "image": {
+      "filter": {
+        "$value": "brightness(0.8) contrast(1.2)",
+        "$type": "other"
+      }
+    }
+  }
+}

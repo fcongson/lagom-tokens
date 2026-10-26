@@ -1,0 +1,38 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "secondary": {
+          "$value": "{palette.sand.15}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.sand.30}",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "fg": {
+          "$value": "{palette.brick.30}",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "{palette.brick.35}",
+          "$type": "color"
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.brick.30}",
+        "$type": "color"
+      },
+      "button": {
+        "primary": {
+          "bg": {
+            "$value": "{palette.brick.30}",
+            "$type": "color"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+/*
+ * A minimal white label: Base, with a teal accent.
+ * Set data-lagom-brand="acme" on <html>, then load this after lagom.css.
+ * Check it with: npx check-brand examples/white-label.css
+ *
+ * Four blocks, one per mode and contrast, plus the same increased-contrast
+ * values again inside @media (prefers-contrast: more) for people who set it
+ * in their OS rather than with data-lagom-contrast="more".
+ *
+ * The selector lists let a section switch mode or contrast on its own.
+ * If you only ever set the attributes on <html>, the last selector in each
+ * list is the one that matters.
+ */
+
+/* Light */
+[data-lagom-brand~="acme"] {
+  --acme-teal-20: #123633;
+  --acme-teal-35: #0a5c58;
+  --acme-teal-40: #006a65;
+  --acme-teal-70: #6db8b4;
+  --acme-teal-75: #87c4c0;
+  --acme-teal-90: #d0e7e5;
+  --lagom-semantic-color-accent-default: var(--acme-teal-40);
+  --lagom-semantic-color-accent-fg: var(--acme-teal-40);
+  --lagom-semantic-color-accent-bg: var(--acme-teal-90);
+  --lagom-semantic-color-focus-ring: var(--acme-teal-40);
+}
+
+/* Dark */
+[data-lagom-theme~="dark"] [data-lagom-brand~="acme"],
+[data-lagom-brand~="acme"] [data-lagom-theme~="dark"],
+[data-lagom-brand~="acme"][data-lagom-theme~="dark"] {
+  --lagom-semantic-color-accent-default: var(--acme-teal-70);
+  --lagom-semantic-color-accent-fg: var(--acme-teal-70);
+  --lagom-semantic-color-accent-bg: var(--acme-teal-20);
+  --lagom-semantic-color-focus-ring: var(--acme-teal-70);
+}
+
+/* Light, increased contrast (AAA: 7:1 text, 4.5:1 non-text) */
+[data-lagom-contrast~="more"] [data-lagom-brand~="acme"],
+[data-lagom-brand~="acme"] [data-lagom-contrast~="more"],
+[data-lagom-brand~="acme"][data-lagom-contrast~="more"] {
+  --lagom-semantic-color-accent-default: var(--acme-teal-35);
+  --lagom-semantic-color-accent-fg: var(--acme-teal-35);
+  --lagom-semantic-color-focus-ring: var(--acme-teal-35);
+}
+
+/* Dark, increased contrast */
+[data-lagom-theme~="dark"][data-lagom-contrast~="more"] [data-lagom-brand~="acme"],
+[data-lagom-theme~="dark"] [data-lagom-contrast~="more"] [data-lagom-brand~="acme"],
+[data-lagom-contrast~="more"] [data-lagom-theme~="dark"] [data-lagom-brand~="acme"],
+[data-lagom-brand~="acme"][data-lagom-contrast~="more"] [data-lagom-theme~="dark"],
+[data-lagom-brand~="acme"] [data-lagom-contrast~="more"] [data-lagom-theme~="dark"],
+[data-lagom-contrast~="more"] [data-lagom-brand~="acme"] [data-lagom-theme~="dark"],
+[data-lagom-contrast~="more"] [data-lagom-brand~="acme"][data-lagom-theme~="dark"],
+[data-lagom-brand~="acme"][data-lagom-theme~="dark"] [data-lagom-contrast~="more"],
+[data-lagom-brand~="acme"] [data-lagom-theme~="dark"] [data-lagom-contrast~="more"],
+[data-lagom-theme~="dark"] [data-lagom-brand~="acme"] [data-lagom-contrast~="more"],
+[data-lagom-theme~="dark"] [data-lagom-brand~="acme"][data-lagom-contrast~="more"],
+[data-lagom-brand~="acme"] [data-lagom-theme~="dark"][data-lagom-contrast~="more"],
+[data-lagom-brand~="acme"][data-lagom-theme~="dark"][data-lagom-contrast~="more"] {
+  --lagom-semantic-color-accent-default: var(--acme-teal-75);
+  --lagom-semantic-color-accent-fg: var(--acme-teal-75);
+  --lagom-semantic-color-focus-ring: var(--acme-teal-75);
+}
+
+/* The same, for prefers-contrast: more. Keep this after the blocks above. */
+@media (prefers-contrast: more) {
+  [data-lagom-brand~="acme"] {
+    --lagom-semantic-color-accent-default: var(--acme-teal-35);
+    --lagom-semantic-color-accent-fg: var(--acme-teal-35);
+    --lagom-semantic-color-focus-ring: var(--acme-teal-35);
+  }
+
+  [data-lagom-theme~="dark"] [data-lagom-brand~="acme"],
+  [data-lagom-brand~="acme"] [data-lagom-theme~="dark"],
+  [data-lagom-brand~="acme"][data-lagom-theme~="dark"] {
+    --lagom-semantic-color-accent-default: var(--acme-teal-75);
+    --lagom-semantic-color-accent-fg: var(--acme-teal-75);
+    --lagom-semantic-color-focus-ring: var(--acme-teal-75);
+  }
+}

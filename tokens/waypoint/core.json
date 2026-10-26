@@ -1,0 +1,46 @@
+{
+  "core": {
+    "fontFamilies": {
+      "heading": {
+        "$value": "Fraunces, serif",
+        "$type": "fontFamilies"
+      },
+      "sansSerif": {
+        "$value": "'Work Sans', sans-serif",
+        "$type": "fontFamilies"
+      },
+      "serif": {
+        "$value": "Fraunces, serif",
+        "$type": "fontFamilies"
+      },
+      "monospace": {
+        "$value": "'IBM Plex Mono', monospace",
+        "$type": "fontFamilies"
+      }
+    },
+    "fontWeights": {
+      "headingBold": {
+        "$value": "600",
+        "$type": "fontWeights"
+      }
+    },
+    "fontSizes": {
+      "h1": {
+        "$value": "54px",
+        "$type": "fontSizes"
+      },
+      "h2": {
+        "$value": "36px",
+        "$type": "fontSizes"
+      },
+      "h3": {
+        "$value": "24px",
+        "$type": "fontSizes"
+      },
+      "h4": {
+        "$value": "16px",
+        "$type": "fontSizes"
+      }
+    }
+  }
+}

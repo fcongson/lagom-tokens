@@ -1,0 +1,25 @@
+{
+  "tokenSetOrder": [
+    "base/palette",
+    "base/core",
+    "base/semantic",
+    "base/semantic-dark",
+    "base/semantic-more",
+    "base/semantic-more-dark",
+    "base/component",
+    "fern/palette",
+    "fern/core",
+    "fern/semantic",
+    "fern/semantic-dark",
+    "fern/semantic-more",
+    "fern/semantic-more-dark",
+    "fern/component",
+    "waypoint/palette",
+    "waypoint/core",
+    "waypoint/semantic",
+    "waypoint/semantic-dark",
+    "waypoint/semantic-more",
+    "waypoint/semantic-more-dark",
+    "waypoint/component"
+  ]
+}

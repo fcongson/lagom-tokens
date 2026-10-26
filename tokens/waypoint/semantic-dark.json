@@ -1,0 +1,100 @@
+{
+  "semantic": {
+    "color": {
+      "fg": {
+        "default": {
+          "$value": "{palette.sand.90}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.sand.75}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.sand.65}",
+          "$type": "color"
+        }
+      },
+      "bg": {
+        "default": {
+          "$value": "{palette.sand.15}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.sage.30}",
+          "$type": "color"
+        },
+        "tertiary": {
+          "$value": "{palette.sand.25}",
+          "$type": "color"
+        }
+      },
+      "border": {
+        "default": {
+          "$value": "{palette.sand.90}",
+          "$type": "color"
+        },
+        "secondary": {
+          "$value": "{palette.brick.50}",
+          "$type": "color"
+        }
+      },
+      "accent": {
+        "default": {
+          "$value": "{palette.brick.45}",
+          "$type": "color"
+        },
+        "fg": {
+          "$value": "{palette.brick.75}",
+          "$type": "color"
+        },
+        "onAccent": {
+          "$value": "{palette.sand.98}",
+          "$type": "color"
+        },
+        "bg": {
+          "$value": "{palette.sage.30}",
+          "$type": "color"
+        }
+      },
+      "button": {
+        "primary": {
+          "bg": {
+            "$value": "{palette.brick.65}",
+            "$type": "color"
+          },
+          "fg": {
+            "$value": "{palette.sand.15}",
+            "$type": "color"
+          }
+        },
+        "secondary": {
+          "bg": {
+            "$value": "transparent",
+            "$type": "color"
+          },
+          "fg": {
+            "$value": "{palette.sand.90}",
+            "$type": "color"
+          }
+        }
+      },
+      "overlay": {
+        "background": {
+          "$value": "{palette.sand.15}",
+          "$type": "color"
+        }
+      },
+      "selection": {
+        "bg": {
+          "$value": "{palette.sage.30}",
+          "$type": "color"
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.brick.75}",
+        "$type": "color"
+      }
+    }
+  }
+}

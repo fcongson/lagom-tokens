@@ -1,7 +1,7 @@
 {
-  "name": "@fcongson/lagom-tokens",
+  "name": "lagom-tokens-monorepo",
+  "private": true,
   "author": "Frank Congson",
-  "license": "MIT",
   "type": "module",
   "engines": {
     "node": ">=22.0.0"
@@ -10,23 +10,21 @@
     "type": "git",
     "url": "https://github.com/fcongson/lagom-tokens"
   },
-  "devDependencies": {
-    "@tokens-studio/sd-transforms": "^2.0.3",
-    "style-dictionary": "^5.5.0"
-  },
-  "scripts": {
-    "build": "node scripts/sd.build.js && npm run css:calc",
-    "css:calc": "node scripts/css.calc.js",
-    "verify": "node scripts/verify-build.js"
-  },
-  "version": "1.0.0",
-  "files": [
-    "css/",
-    "js/"
+  "workspaces": [
+    "packages/*"
   ],
-  "exports": {
-    "./css/*": "./css/*",
-    "./js/*": "./js/*",
-    "./package.json": "./package.json"
+  "scripts": {
+    "ramps": "node scripts/ramps.js",
+    "ramps:check": "node scripts/ramps.js --check",
+    "build": "node scripts/build.js",
+    "check-brand": "node scripts/check-brand.js",
+    "suggest-more": "node scripts/suggest-more.js",
+    "verify": "node scripts/verify.js",
+    "test:cascade": "node test/cascade.test.js",
+    "migrate": "node scripts/migrate.js",
+    "ci": "yarn ramps:check && yarn build && yarn check-brand && node scripts/check-brand.js examples/white-label.css && yarn verify && yarn test:cascade"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
   }
 }

@@ -1,0 +1,161 @@
+{
+  "component": {
+    "Button": {
+      "color": {
+        "primary": {
+          "text": {
+            "$value": "{semantic.color.button.primary.fg}",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "{semantic.color.button.primary.bg}",
+            "$type": "color"
+          },
+          "background": {
+            "$value": "{semantic.color.button.primary.bg}",
+            "$type": "color"
+          }
+        },
+        "secondary": {
+          "text": {
+            "$value": "{semantic.color.button.secondary.fg}",
+            "$type": "color"
+          },
+          "border": {
+            "$value": "{semantic.color.button.secondary.fg}",
+            "$type": "color"
+          },
+          "background": {
+            "$value": "{semantic.color.button.secondary.bg}",
+            "$type": "color"
+          }
+        }
+      },
+      "borderRadius": {
+        "$value": "{core.borderRadius.sm}",
+        "$type": "borderRadius"
+      },
+      "borderWidth": {
+        "$value": "{semantic.border.width}",
+        "$type": "borderWidth"
+      }
+    },
+    "PageHeader": {
+      "typography": {
+        "$value": {
+          "fontFamily": "{core.fontFamilies.heading}",
+          "fontWeight": "{core.fontWeights.headingBold}",
+          "lineHeight": "{core.lineHeights.heading}",
+          "fontSize": "{core.fontSizes.header1}"
+        },
+        "$type": "typography"
+      },
+      "color": {
+        "text": {
+          "$value": "{semantic.color.fg.default}",
+          "$type": "color"
+        }
+      },
+      "marginBottom": {
+        "$value": "{core.spacing.xxl} * 2",
+        "$type": "spacing"
+      },
+      "marginBottomSm": {
+        "$value": "{core.spacing.xxl}",
+        "$type": "spacing"
+      }
+    },
+    "SectionHeader": {
+      "typography": {
+        "$value": {
+          "fontFamily": "{core.fontFamilies.heading}",
+          "fontWeight": "{core.fontWeights.headingBold}",
+          "lineHeight": "{core.lineHeights.heading}",
+          "fontSize": "{core.fontSizes.header2}"
+        },
+        "$type": "typography"
+      },
+      "color": {
+        "text": {
+          "$value": "{semantic.color.fg.default}",
+          "$type": "color"
+        }
+      },
+      "marginBottom": {
+        "$value": "{core.spacing.xxl}",
+        "$type": "spacing"
+      }
+    },
+    "FeaturedSection": {
+      "color": {
+        "background": {
+          "$value": "{semantic.color.bg.secondary}",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "{semantic.color.fg.default}",
+          "$type": "color"
+        },
+        "backgroundAccent": {
+          "$value": "{semantic.color.accent.bg}",
+          "$type": "color"
+        }
+      },
+      "imageFit": {
+        "$value": "cover",
+        "$type": "other"
+      }
+    },
+    "Section": {
+      "color": {
+        "background": {
+          "$value": "{semantic.color.bg.default}",
+          "$type": "color"
+        },
+        "text": {
+          "$value": "{semantic.color.fg.default}",
+          "$type": "color"
+        }
+      }
+    },
+    "image": {
+      "overlay": {
+        "color": {
+          "background": {
+            "$value": "{semantic.color.overlay.background}",
+            "$type": "color"
+          }
+        },
+        "opacity": {
+          "$value": "{semantic.opacity.overlay}",
+          "$type": "opacity"
+        }
+      }
+    },
+    "CallToAction": {
+      "typography": {
+        "$value": {
+          "fontFamily": "{core.fontFamilies.body}",
+          "fontWeight": "{core.fontWeights.bodyRegular}",
+          "lineHeight": "{core.lineHeights.body}",
+          "fontSize": "{core.fontSizes.xl}"
+        },
+        "$type": "typography"
+      }
+    },
+    "Hero": {
+      "marginBottom": {
+        "$value": "8rem",
+        "$type": "spacing"
+      },
+      "marginBottomSm": {
+        "$value": "4rem",
+        "$type": "spacing"
+      },
+      "imageFit": {
+        "$value": "cover",
+        "$type": "other"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@fcongson/lagom-brands",
+  "version": "1.0.0",
+  "description": "Frank Congson's brands (Fern, Waypoint) for Lagom. Public, but not licensed for reuse: see LICENSE.",
+  "author": "Frank Congson",
+  "license": "UNLICENSED",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fcongson/lagom-tokens",
+    "directory": "packages/lagom-brands"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "peerDependencies": {
+    "@fcongson/lagom-tokens": "^2.0.0"
+  },
+  "files": [
+    "README.md",
+    "CHANGELOG.md",
+    "fern/",
+    "waypoint/",
+    "LICENSE"
+  ],
+  "exports": {
+    "./fern/*": "./fern/*",
+    "./waypoint/*": "./waypoint/*",
+    "./package.json": "./package.json"
+  }
+}

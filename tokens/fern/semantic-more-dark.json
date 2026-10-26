@@ -1,0 +1,34 @@
+{
+  "semantic": {
+    "color": {
+      "accent": {
+        "fg": {
+          "$value": "{palette.olive.75}",
+          "$type": "color"
+        },
+        "default": {
+          "$value": "{palette.olive.35}",
+          "$type": "color"
+        }
+      },
+      "button": {
+        "secondary": {
+          "fg": {
+            "$value": "{palette.olive.75}",
+            "$type": "color"
+          }
+        },
+        "primary": {
+          "bg": {
+            "$value": "{palette.olive.75}",
+            "$type": "color"
+          }
+        }
+      },
+      "focusRing": {
+        "$value": "{palette.olive.70}",
+        "$type": "color"
+      }
+    }
+  }
+}
